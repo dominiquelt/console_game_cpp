@@ -1,76 +1,71 @@
-#include "dec.h"
+#include <iostream>
+#include <random>
 #include <string>
 #include <vector>
-#include <random>
-#include <iostream>
+
+#include "dec.h"
 
 // DICE
-Dice::Dice(losowanie* model):los(model),dist(1,6){
-}
-int Dice::Roll(){
-    auto* gen = los->getGenerator();
-    return dist(*gen);
-
-
+Dice::Dice(losowanie* model) : los(model), dist(1, 6) {}
+int Dice::Roll() {
+  auto* gen = los->getGenerator();
+  return dist(*gen);
 }
 
-losowanie::losowanie():gen(rd){}
+losowanie::losowanie() : gen(rd()) {}
 
-std::mt19937*  losowanie::getGenerator() {
-    return &gen;
+std::mt19937* losowanie::getGenerator() {
+  return &gen;
 }
 
+randomPole::randomPole(losowanie* model, int liczbaPol)
+    : los(model), dist(0, liczbaPol - 1) {}
 
-randomPole::randomPole(losowanie* model, int liczbaPol): los(model), dist(0, liczbaPol-1){
-
+int randomPole::getPole() {
+  return dist(*los->getGenerator());
 }
 
 // --- ---FIELD
 void Field::OnLand(Player* p) {
-    std::cout << "Stoisz na bezpiecznym polu." << std::endl;
+  std::cout << "Stoisz na bezpiecznym polu." << std::endl;
 }
 
-void TrapField::OnLand(Player* p) {
-    std::cout << "O NIE! To JAMA! Wpadasz w pułapkę." << std::endl;
-}
+// void TrapField::OnLand(Player* p) {
+//   std::cout << "O NIE! To JAMA! Wpadasz w pułapkę." << std::endl;
+// }
 
-void GoalField::OnLand(Player* p) {
-    std::cout << "GRATULACJE! To jest CEL! Wygrałeś!" << std::endl;
-}
+// void GoalField::OnLand(Player* p) {
+//   std::cout << "GRATULACJE! To jest CEL! Wygrałeś!" << std::endl;
+// }
 
 // --- BOARD
 Board::Board(int liczbaPol, losowanie* systemLosu) {
-    randomPole rp(systemLosu, liczbaPol);
-    
-    int jamaIdx = rp.getPole();
-    int celIdx = rp.getPole();
-    
-    while (jamaIdx == celIdx) {
-        celIdx = rp.getPole();
-    }
+  randomPole rp(systemLosu, liczbaPol);
 
-    for (int i = 0; i < liczbaPol; i++) {
-        if (i == jamaIdx) {
-            fields.push_back(new TrapField());
-        } else if (i == celIdx) {
-            fields.push_back(new GoalField());
-        } else {
-            fields.push_back(new Field());
-        }
-    }
-    std::cout << "Plansza stworzona! Jama na: " << jamaIdx << ", Cel na: " << celIdx << std::endl;
+  int jamaIdx = rp.getPole();
+  int celIdx = rp.getPole();
+
+  while (jamaIdx == celIdx) {
+    celIdx = rp.getPole();
+  }
+
+  for (int i = 0; i < liczbaPol; i++) {
+    fields.push_back(new Field());
+  }
+  std::cout << "Plansza stworzona! Jama na: " << jamaIdx
+            << ", Cel na: " << celIdx << std::endl;
 }
 
 Board::~Board() {
-    for (Field* f : fields) {
-        delete f; 
-    }
-    fields.clear();
+  for (Field* f : fields) {
+    delete f;
+  }
+  fields.clear();
 }
 
 Field* Board::getField(int index) {
-    if (index >= 0 && index < fields.size()) {
-        return fields[index];
-    }
-    return nullptr;
+  if (index >= 0 && index < fields.size()) {
+    return fields[index];
+  }
+  return nullptr;
 }

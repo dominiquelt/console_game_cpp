@@ -12,17 +12,31 @@ class Board;
 
 class Field {
 public:
-    void OnLand(Player);
+    virtual void OnLand(Player* p) { 
 
+    }
+    virtual ~Field() {} //  destruktor w klasach bazowych
+    private:
+        int number;
+};
+
+class TrapField : public Field {
+public:
+    void OnLand(Player* p) override; 
+};
+
+class GoalField : public Field {
+public:
+    void OnLand(Player* p) override; 
 };
 
 class Board {
 public:
-    int DrawFieldPosition();
-
+    Board(int liczbaPol, losowanie* systemLosu); // Konstruktor
+    ~Board();                                    
+    Field* getField(int index);                  
 private:
-    std::vector<Field* > fields;
-
+    std::vector<Field*> fields;
 };
 
 class Player {
@@ -47,15 +61,34 @@ private:
 
 };
 
+class losowanie {
+    private:
+        std::random_device rd;                     
+        std::mt19937 gen; 
+    public:
+        std::mt19937* getGenerator();
+
+};
+
+class randomPole {
+    private:
+        losowanie* los; // kompoilator domysla sie ze tu chce stworzyc obiekt jesli istnieje konstruktor domyslny ()
+        std::uniform_int_distribution<> dist;
+    public:
+        randomPole(losowanie* model, int liczbaPol); //oporocz losowania musze przekazac jeszcze liczbe pol
+        int getPole();
+    
+
+};
+
 class Dice {
     private:
-        static std::mt19937 gen; // static, eby wszystkie kostki używały tego samego ziarna
+        losowanie* los; // kompoilator domysla sie ze tu chce stworzyc obiekt jesli istnieje konstruktor domyslny ()
+        std::uniform_int_distribution<> dist;
     public:
-        static int Roll(int max);
+        Dice (losowanie* model);
+        int Roll ();
 };
 
 #endif
 
-//1. tutaj static gena a gdzie pozostale dane dotyczace losowania, ktore ustawialam na pcozatku poprzedniej gry
-//2. co to jest to virtual 
-//3. gdzie dawac konstruktor czemu kaza mi dawac konstruktor w pliku h

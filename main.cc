@@ -1,8 +1,13 @@
 #include <iostream>
 #include <random>
+#include "dec.h"
+
+losowanie los;
+Dice dice(&los);
+randomPole pole(&los,5);
 
 
-int main() {
+/* int main() {
   std::random_device rd;                     
   std::mt19937 gen(rd());
   int pola = 0;
@@ -58,11 +63,13 @@ int main() {
 
   // while wysolowany != jama lub cel
      // uzytkownik rzut kostka random
-     /* 0+cyfra z rzutu
+      0+cyfra z rzutu
       cout numer pola (jesli numer pola >= ilosci pol to wynik - ilosc pol = pole na ktorym uzytkownik stanie)
       komputer to samo
       znowu uztykownik 
-     */
+     
 
   return 0;
 }
+
+*/

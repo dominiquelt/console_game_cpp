@@ -1,9 +1,11 @@
 #include <iostream>
 #include <random>
 
-#include "dec.h"
+#include "dice.h"
+#include "losowanie.h"
+#include "randomPole.h"
 
-losowanie los;  // globalna zmienna poza mainem
+Losowanie los;  // globalna zmienna poza mainem
 
 int main() {
   int pola = 0;
@@ -11,10 +13,11 @@ int main() {
     std::cout << "Wyznacz ilość pol: " << std::endl;
     std::cin >> pola;
   }
-  randomPole pole(&los, pola);
+  RandomPole pole(&los, pola);
   int cel = pole.getPole();
-  int jama = pole.getPole();  // jama nie moze = cel //linie 15-19 w board W
-                              // MAINIE UZYC OBIEKTU BOARD
+  int jama =
+      pole.getPole();  // jama nie moze = cel //linie 15-19 w board Wwsyztskie
+                       // klasy do oddzielnych plikow MAINIE UZYC OBIEKTU BOARD
   while (jama == cel) {
     jama = pole.getPole();
   }

@@ -12,21 +12,10 @@ class Board;
 class Field {
  public:
   void OnLand(Player* p);
-  // virtual ~Field() {}  //  destruktor w klasach bazowych
+
  private:
   int number;
 };
-
-// class TrapField : public Field {
-//  public:
-//   void OnLand(Player* p) override;
-// }; //obiekt trap field o typie field albo wektor pol z oznaczonym w indeksie
-// trap/goal
-
-// class GoalField : public Field {
-//  public:
-//   void OnLand(Player* p) override;
-// };
 
 class Player {
  public:
@@ -48,9 +37,11 @@ class Game {
   void ShowStatus();
 };
 
-class losowanie {
+class losowanie {  // obiekty definiujemy z duzej litery, metody tez np
+                   // getGenerator, kolejnosc sekcji public>>protecte>>private
  private:
-  std::random_device rd;
+  std::random_device
+      rd;  // poprawic prywatne zmienne na np rd_ wazna jest ta podloga!
   std::mt19937 gen;
 
  public:

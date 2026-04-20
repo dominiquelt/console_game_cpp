@@ -1,10 +1,10 @@
 #include <iostream>
 #include <random>
 
+#include "board.h"
 #include "dice.h"
 #include "losowanie.h"
 #include "randomPole.h"
-
 Losowanie los;  // globalna zmienna poza mainem
 
 int main() {
@@ -13,6 +13,9 @@ int main() {
     std::cout << "Wyznacz ilość pol: " << std::endl;
     std::cin >> pola;
   }
+
+  Board plansza(pola);
+
   RandomPole pole(&los, pola);
   int cel = pole.getPole();
   int jama =
@@ -22,9 +25,10 @@ int main() {
     jama = pole.getPole();
   }
 
-  std::cout << "Wspaniale gramy na " << pola << " polach!" << " JAMA: " << jama
-            << " CEL: " << cel << std::endl;
+  plansza.DrawFieldPossion(jama, cel);
 
+  std::cout << "Wspaniale gramy na " << plansza.GetSize() << " polach!"
+            << " JAMA: " << jama << " CEL: " << cel << std::endl;
   int pole_komputer = 0;
   int pole_user = 0;
   bool is_out = false;

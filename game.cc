@@ -64,6 +64,62 @@ void Game::ShowStatus() {
             << " position: " << player2_->GetPosition() << std::endl;
 }
 
+Game::Game(const Game& other)
+    : board_(other.board_ ? new Board(*other.board_) : nullptr),
+      dice_(other.dice_ ? new Dice(&los_) : nullptr),
+      player1_(other.player1_ ? new Player(*other.player1_) : nullptr),
+      player2_(other.player2_ ? new Player(*other.player2_) : nullptr) {
+  std::cout << "[Kopiujacy] Gleboka kopia zasobu.\n";
+}
+Game& Game::operator=(const Game& other) {
+  std::cout << "[Przypisanie kopiujace] Zwolnienie starego i kopia nowego.\n";
+  if (this != &other) {
+    delete board_;
+    delete dice_;
+    delete player1_;
+    delete player2_;
+
+    board_ = other.board_ ? new Board(*other.board_) : nullptr;
+    dice_ = other.dice_ ? new Dice(&los_) : nullptr;
+    player1_ = other.player1_ ? new Player(*other.player1_) : nullptr;
+    player2_ = other.player2_ ? new Player(*other.player2_) : nullptr;
+  }
+  return *this;
+}
+
+Game::Game(Game&& other) noexcept
+    : board_(other.board_),
+      dice_(other.dice_),
+      player1_(other.player1_),
+      player2_(other.player2_) {
+  std::cout << "[Przenoszacy] Przejęcie wskaźnika.\n";
+  other.board_ = nullptr;
+  other.dice_ = nullptr;
+  other.player1_ = nullptr;
+  other.player2_ = nullptr;
+}
+
+Game& Game::operator=(Game&& other) noexcept {
+  std::cout << "[Przypisanie przenoszace] Zamiana wskaźników.\n";
+  if (this != &other) {
+    delete board_;
+    delete dice_;
+    delete player1_;
+    delete player2_;
+
+    board_ = other.board_;
+    dice_ = other.dice_;
+    player1_ = other.player1_;
+    player2_ = other.player2_;
+
+    other.board_ = nullptr;
+    other.dice_ = nullptr;
+    other.player1_ = nullptr;
+    other.player2_ = nullptr;
+  }
+  return *this;
+}
+
 Game::~Game() {
   delete board_;
   delete dice_;

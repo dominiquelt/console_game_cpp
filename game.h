@@ -9,6 +9,10 @@ class Board;
 class Game {
  public:
   Game();
+  Game(const Game& other);
+  Game& operator=(const Game& other);
+  Game(Game&& other) noexcept;
+  Game& operator=(Game&& other) noexcept;
   ~Game();
   void Run();
 

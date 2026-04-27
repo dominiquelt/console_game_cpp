@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "field.h"
+#include "player.h"
 
 Board::Board(int PolaGry) {
   fields_.resize(PolaGry);
@@ -13,6 +14,11 @@ int Board::GetSize() {
 }
 
 void Board::DrawFieldPossion(int jama_index, int cel_index) {
-  fields_[jama_index].SetType(1);
-  fields_[cel_index].SetType(2);
+  fields_[jama_index].SetType(Field::kJama);
+  fields_[cel_index].SetType(Field::kCel);
+}
+
+void Board::HandlePlayerLand(Player* p) {
+  int pos = p->GetPosition();
+  fields_[pos].OnLand(p);
 }

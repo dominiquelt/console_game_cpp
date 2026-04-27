@@ -3,17 +3,19 @@
 #include <iostream>
 #include <string>
 
-#include "dice.h"
-
 Player::Player(std::string n) {
   name_ = n;
   std::cout << "hej " << n << std::endl;
 }
 
-int Player::GetPosition() {
+std::string Player::PlayerName() {
+  return name_;
+}
+
+int Player::GetPosition() const {
   return position_;
 }
-bool Player::GetState() {
+bool Player::IsOut() const {
   return is_out_;
 }
 void Player::SetOut(bool playerout) {

@@ -4,7 +4,8 @@
 #include <vector>
 
 #include "field.h"
-#include "losowanie.h"
+
+class Player;
 
 class Board {
  public:
@@ -12,6 +13,7 @@ class Board {
   // Field* getField(int index);
   void DrawFieldPossion(int jama_index, int cel_index);
   int GetSize();
+  void HandlePlayerLand(Player* p);
 
  private:
   std::vector<Field> fields_;

@@ -5,13 +5,18 @@ class Player;
 
 class Field {
  public:
+  enum FieldType {
+    kSafe,  // automatically = 0
+    kJama,  // automatically = 1
+    kCel    // automatically = 2
+  };
   Field();
   void OnLand(Player* p);
-  void SetType(int new_type);
+  void SetType(FieldType new_type);
 
  private:
   int number_;
-  int type_ = 0;
+  FieldType type_ = kSafe;
 };
 
 #endif

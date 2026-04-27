@@ -11,8 +11,9 @@ class Player {
   Player(std::string n);
   void Move(int steps, int board_size);
   void SetOut(bool playerout);
-  bool GetState();
-  int GetPosition();
+  bool IsOut() const;  // isout
+  int GetPosition() const;
+  std::string PlayerName();
 
  private:
   int position_ = 0;

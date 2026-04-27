@@ -11,4 +11,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # 4. Tworzymy plik wykonywalny (aplikację) o nazwie "app"
 # Ważne: Wymieniamy tu TYLKO pliki źródłowe (.cc lub .cpp). 
 # Plików nagłówkowych (.h) tu nie wpisujemy, kompilator sam je znajdzie!
-add_executable(app main.cc losowanie.cc dice.cc board.cc field.cc player.cc randomPole.cc)
+add_executable(app main.cc losowanie.cc dice.cc board.cc field.cc player.cc randomPole.cc game.cc)

@@ -7,6 +7,6 @@
 RandomPole::RandomPole(Losowanie* model, int liczbaPol)
     : los_(model), dist_(0, liczbaPol - 1) {}
 
-int RandomPole::getPole() {
+int RandomPole::RollRandomPosition() {
   return dist_(*los_->Getgenerator());
 }

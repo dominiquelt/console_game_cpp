@@ -9,7 +9,7 @@
 #include "player.h"
 #include "randomPole.h"
 
-Game::Game() {}
+Game::Game() : los_(Losowanie::GetInstance()) {}
 
 void Game::Run() {
   int pola = 0;
@@ -24,10 +24,10 @@ void Game::Run() {
 
   RandomPole pole(&los_, pola);
 
-  int cel = pole.getPole();
-  int jama = pole.getPole();
+  int cel = pole.RollRandomPosition();
+  int jama = pole.RollRandomPosition();
   while (jama == cel) {
-    jama = pole.getPole();
+    jama = pole.RollRandomPosition();
   }
   board_->DrawFieldPossion(jama, cel);
 
@@ -36,15 +36,17 @@ void Game::Run() {
   }
   std::cout << "game is O V E R!" << std::endl;
 }
+void Game::ProcessTurn(Player* p) {
+  p->Move(dice_->Roll(), board_->GetSize());
+  board_->HandlePlayerLand(p);
+}
 
 void Game::NextTurn() {
-  player1_->Move(dice_->Roll(), board_->GetSize());
-  board_->HandlePlayerLand(player1_);
+  ProcessTurn(player1_);
   if (CheckEndGame()) {
     return;
   }
-  player2_->Move(dice_->Roll(), board_->GetSize());
-  board_->HandlePlayerLand(player2_);
+  ProcessTurn(player2_);
   if (CheckEndGame()) {
     return;
   }
@@ -57,7 +59,7 @@ bool Game::CheckEndGame() {
     return false;
   }
 }
-void Game::ShowStatus() {
+void Game::ShowStatus() const {
   std::cout << player1_->PlayerName()
             << " position: " << player1_->GetPosition() << std::endl;
   std::cout << player2_->PlayerName()
@@ -65,7 +67,8 @@ void Game::ShowStatus() {
 }
 
 Game::Game(const Game& other)
-    : board_(other.board_ ? new Board(*other.board_) : nullptr),
+    : los_(Losowanie::GetInstance()),
+      board_(other.board_ ? new Board(*other.board_) : nullptr),
       dice_(other.dice_ ? new Dice(&los_) : nullptr),
       player1_(other.player1_ ? new Player(*other.player1_) : nullptr),
       player2_(other.player2_ ? new Player(*other.player2_) : nullptr) {
@@ -88,7 +91,8 @@ Game& Game::operator=(const Game& other) {
 }
 
 Game::Game(Game&& other) noexcept
-    : board_(other.board_),
+    : los_(Losowanie::GetInstance()),
+      board_(other.board_),
       dice_(other.dice_),
       player1_(other.player1_),
       player2_(other.player2_) {

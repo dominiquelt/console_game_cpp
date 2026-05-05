@@ -10,7 +10,7 @@ class RandomPole {
   RandomPole(
       Losowanie* model,
       int liczbaPol);  // oporocz losowania musze przekazac jeszcze liczbe pol
-  int getPole();
+  int RollRandomPosition();
 
  private:
   Losowanie* los_;

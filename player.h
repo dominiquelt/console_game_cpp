@@ -13,7 +13,7 @@ class Player {
   void SetOut(bool playerout);
   bool IsOut() const;  // isout
   int GetPosition() const;
-  std::string PlayerName();
+  std::string PlayerName() const;
 
  private:
   int position_ = 0;

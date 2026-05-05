@@ -8,7 +8,7 @@ Player::Player(std::string n) {
   std::cout << "hej " << n << std::endl;
 }
 
-std::string Player::PlayerName() {
+std::string Player::PlayerName() const {
   return name_;
 }
 

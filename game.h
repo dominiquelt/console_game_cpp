@@ -17,10 +17,11 @@ class Game {
   void Run();
 
  private:
+  void ProcessTurn(Player* p);
   void NextTurn();
   bool CheckEndGame();
-  void ShowStatus();
-  Losowanie los_;
+  void ShowStatus() const;
+  Losowanie& los_;
   Dice* dice_ = nullptr;
   Board* board_ = nullptr;
   Player* player1_ = nullptr;

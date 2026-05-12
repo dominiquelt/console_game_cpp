@@ -1,14 +1,14 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "board.h"
+#include "dice.h"
 #include "losowanie.h"
-class Dice;
-class Player;
-class Board;
+#include "player.h"
 
 class Game {
  public:
-  Game();
+  Game(int pola);
   Game(const Game& other);
   Game& operator=(const Game& other);
   Game(Game&& other) noexcept;
@@ -22,10 +22,11 @@ class Game {
   bool CheckEndGame();
   void ShowStatus() const;
   Losowanie& los_;
-  Dice* dice_ = nullptr;
-  Board* board_ = nullptr;
-  Player* player1_ = nullptr;
-  Player* player2_ = nullptr;
+  int pola_;
+  Board board_;
+  Dice dice_;
+  Player player1_;
+  Player player2_;
 };
 
 #endif

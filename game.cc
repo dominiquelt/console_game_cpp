@@ -46,7 +46,8 @@ void Game::NextTurn() {
   if (CheckEndGame()) {
     return;
   }
-  ShowStatus();
+  ShowStatus(player1_);
+  ShowStatus(player2_);
 }
 bool Game::CheckEndGame() {
   if (player1_.IsOut() || player2_.IsOut()) {
@@ -55,31 +56,8 @@ bool Game::CheckEndGame() {
     return false;
   }
 }
-void Game::ShowStatus() const {
-  std::cout << player1_.PlayerName() << " position: " << player1_.GetPosition()
-            << std::endl;
-  std::cout << player2_.PlayerName() << " position: " << player2_.GetPosition()
-            << std::endl;  // const referencja tutaj uzyc w paramentrze player
-}
-
-Game::Game(const Game& other)
-    : los_(Losowanie::GetInstance()),
-      board_(other.board_),
-      dice_(other.dice_),
-      player1_(other.player1_),
-      player2_(other.player2_) {
-  std::cout << "[Kopiujacy] Gleboka kopia zasobu.\n";
-}
-
-Game& Game::operator=(const Game& other) {
-  std::cout << "[Przypisanie kopiujace] Kopia nowego.\n";
-  if (this != &other) {
-    board_ = other.board_;
-    dice_ = other.dice_;
-    player1_ = other.player1_;
-    player2_ = other.player2_;
-  }
-  return *this;
+void Game::ShowStatus(const Player& p) const {
+  std::cout << p.PlayerName() << " position: " << p.GetPosition() << std::endl;
 }
 
 Game::Game(Game&& other) noexcept

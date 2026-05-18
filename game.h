@@ -9,8 +9,8 @@
 class Game {
  public:
   Game(int pola);
-  Game(const Game& other);
-  Game& operator=(const Game& other);
+  Game(const Game& other) = delete;
+  Game& operator=(const Game& other) = delete;
   Game(Game&& other) noexcept;
   Game& operator=(Game&& other) noexcept;
   ~Game();
@@ -20,7 +20,7 @@ class Game {
   void ProcessTurn(Player* p);
   void NextTurn();
   bool CheckEndGame();
-  void ShowStatus() const;
+  void ShowStatus(const Player& p) const;
   Losowanie& los_;
   int pola_;
   Board board_;

@@ -1,9 +1,13 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#include <memory>
 #include <vector>
 
 #include "field.h"
+#include "fieldCel.h"
+#include "fieldJama.h"
+#include "fieldSafe.h"
 
 class Player;
 
@@ -17,14 +21,14 @@ class Board {
 
   ~Board();
 
-  Board(const Board& other);
-  Board& operator=(const Board& other);
+  Board(const Board& other) = delete;
+  Board& operator=(const Board& other) = delete;
 
   Board(Board&& other) noexcept;
   Board& operator=(Board&& other) noexcept;
 
  private:
-  std::vector<Field> fields_;
+  std::vector<std::unique_ptr<Field>> fields_;
 };
 
 #endif

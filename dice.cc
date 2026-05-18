@@ -7,3 +7,8 @@ int Dice::Roll() {
   auto* gen = los_->Getgenerator();
   return dist_(*gen);
 }
+
+Dice::~Dice() = default;
+
+Dice::Dice(Dice&& other) noexcept = default;
+Dice& Dice::operator=(Dice&& other) noexcept = default;

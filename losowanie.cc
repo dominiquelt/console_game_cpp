@@ -12,3 +12,5 @@ Losowanie& Losowanie::GetInstance() {
   static Losowanie instance;  // created once, lives forever
   return instance;
 }
+
+Losowanie::~Losowanie() = default;

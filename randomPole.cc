@@ -10,3 +10,8 @@ RandomPole::RandomPole(Losowanie* model, int liczbaPol)
 int RandomPole::RollRandomPosition() {
   return dist_(*los_->Getgenerator());
 }
+
+RandomPole::~RandomPole() = default;
+
+RandomPole::RandomPole(RandomPole&& other) noexcept = default;
+RandomPole& RandomPole::operator=(RandomPole&& other) noexcept = default;

@@ -5,12 +5,15 @@ class Player;
 
 class Field {
  public:
-  enum FieldType {
-    kSafe,  // automatically = 0
-    kJama,  // automatically = 1
-    kCel    // automatically = 2
-  };
+  enum FieldType { kSafe, kJama, kCel };
   Field();
+  ~Field();
+
+  Field(const Field& other);
+  Field& operator=(const Field& other);
+
+  Field(Field&& other) noexcept;
+  Field& operator=(Field&& other) noexcept;
   void OnLand(Player* p);
   void SetType(FieldType new_type);
 

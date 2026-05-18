@@ -25,3 +25,12 @@ void Field::OnLand(Player* p) {
 void Field::SetType(FieldType new_type) {
   type_ = new_type;
 }
+
+Field::~Field() = default;
+
+Field::Field(const Field& other) = default;
+Field& Field::operator=(const Field& other) = default;
+
+Field::Field(Field&& other) noexcept = default;
+
+Field& Field::operator=(Field&& other) noexcept = default;

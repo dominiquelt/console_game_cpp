@@ -25,3 +25,9 @@ void Player::SetOut(bool playerout) {
 void Player::Move(int steps, int board_size) {
   position_ = (position_ + steps) % board_size;
 }
+
+Player::~Player() = default;
+Player::Player(const Player& other) = default;
+Player& Player::operator=(const Player& other) = default;
+Player::Player(Player&& other) noexcept = default;
+Player& Player::operator=(Player&& other) noexcept = default;

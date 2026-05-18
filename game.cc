@@ -56,10 +56,10 @@ bool Game::CheckEndGame() {
   }
 }
 void Game::ShowStatus() const {
-  std::cout << player1_.PlayerName()
-            << " position: " << player1_.GetPosition() << std::endl;
-  std::cout << player2_.PlayerName()
-            << " position: " << player2_.GetPosition() << std::endl;
+  std::cout << player1_.PlayerName() << " position: " << player1_.GetPosition()
+            << std::endl;
+  std::cout << player2_.PlayerName() << " position: " << player2_.GetPosition()
+            << std::endl;  // const referencja tutaj uzyc w paramentrze player
 }
 
 Game::Game(const Game& other)

@@ -9,6 +9,12 @@ class Dice {
  public:
   Dice(Losowanie* model);
   int Roll();
+  ~Dice();
+  Dice(const Dice& other) = delete;
+  Dice& operator=(const Dice& other) = delete;
+
+  Dice(Dice&& other) noexcept;
+  Dice& operator=(Dice&& other) noexcept;
 
  private:
   Losowanie* los_;  // kompoilator domysla sie ze tu chce stworzyc obiekt jesli

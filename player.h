@@ -16,7 +16,6 @@ class Player {
   virtual std::string PlayerName() const = 0;
 };
 
-// --- IMPLEMENTACJE ---
 class Human : public Player {
  public:
   Human(std::string name);

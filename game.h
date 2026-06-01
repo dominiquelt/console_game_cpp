@@ -3,30 +3,28 @@
 
 #include "board.h"
 #include "dice.h"
-#include "losowanie.h"
 #include "player.h"
+#include "randomPole.h"
 
 class Game {
  public:
-  Game(int pola);
+  Game(IDice* dice, IBoard* board, Player* player1, Player* player2);
   Game(const Game& other) = delete;
   Game& operator=(const Game& other) = delete;
-  Game(Game&& other) noexcept;
-  Game& operator=(Game&& other) noexcept;
+  Game(Game&& other) noexcept = default;
+  Game& operator=(Game&& other) noexcept = default;
   ~Game();
-  void Run();
+  void Run(IRandomPole* pole);
 
  private:
   void ProcessTurn(Player* p);
   void NextTurn();
   bool CheckEndGame();
   void ShowStatus(const Player& p) const;
-  Losowanie& los_;
-  int pola_;
-  Board board_;
-  Dice dice_;
-  Player player1_;
-  Player player2_;
+  IBoard* board_;
+  IDice* dice_;
+  Player* player1_;
+  Player* player2_;
 };
 
 #endif

@@ -7,6 +7,6 @@
 FieldCel::FieldCel() {}
 
 void FieldCel::OnLand(Player* p) {
-  std::cout << "Stoisz na polu cel, WYGRANA!" << std::endl;
+  std::cout << "You reached the goal, YOU WIN!" << std::endl;
   p->SetOut(true);
 }

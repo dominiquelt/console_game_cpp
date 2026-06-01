@@ -1,33 +1,51 @@
 #include "player.h"
 
-#include <iostream>
 #include <string>
 
-Player::Player(std::string n) {
-  name_ = n;
-  std::cout << "hej " << n << std::endl;
-}
+// human
 
-std::string Player::PlayerName() const {
+Human::Human(std::string name) : name_(name) {}
+
+std::string Human::PlayerName() const {
   return name_;
 }
 
-int Player::GetPosition() const {
+int Human::GetPosition() const {
   return position_;
 }
-bool Player::IsOut() const {
+
+bool Human::IsOut() const {
   return is_out_;
 }
-void Player::SetOut(bool playerout) {
+
+void Human::SetOut(bool playerout) {
   is_out_ = playerout;
 }
 
-void Player::Move(int steps, int board_size) {
+void Human::Move(int steps, int board_size) {
   position_ = (position_ + steps) % board_size;
 }
 
-Player::~Player() = default;
-Player::Player(const Player& other) = default;
-Player& Player::operator=(const Player& other) = default;
-Player::Player(Player&& other) noexcept = default;
-Player& Player::operator=(Player&& other) noexcept = default;
+// computer
+
+Computer::Computer(std::string name) : name_(name) {}
+
+std::string Computer::PlayerName() const {
+  return name_;
+}
+
+int Computer::GetPosition() const {
+  return position_;
+}
+
+bool Computer::IsOut() const {
+  return is_out_;
+}
+
+void Computer::SetOut(bool playerout) {
+  is_out_ = playerout;
+}
+
+void Computer::Move(int steps, int board_size) {
+  position_ = (position_ + steps) % board_size;
+}

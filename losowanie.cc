@@ -13,4 +13,3 @@ Losowanie& Losowanie::GetInstance() {
   return instance;
 }
 
-Losowanie::~Losowanie() = default;

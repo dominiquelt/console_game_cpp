@@ -5,19 +5,23 @@
 
 #include "losowanie.h"
 
-class RandomPole {
+class IRandomPole {
  public:
-  RandomPole(
-      Losowanie* model,
-      int liczbaPol);  // oporocz losowania musze przekazac jeszcze liczbe pol
-  int RollRandomPosition();
+  virtual ~IRandomPole() = default;
+  virtual int RollRandomPosition() = 0;
+};
 
-  ~RandomPole();
+class RandomPole : public IRandomPole {
+ public:
+  RandomPole(Losowanie* model, int liczbaPol);
+  int RollRandomPosition() override;
+
+  ~RandomPole() override = default;
   RandomPole(const RandomPole& other) = delete;
   RandomPole& operator=(const RandomPole& other) = delete;
 
-  RandomPole(RandomPole&& other) noexcept;
-  RandomPole& operator=(RandomPole&& other) noexcept;
+  RandomPole(RandomPole&& other) noexcept = default;
+  RandomPole& operator=(RandomPole&& other) noexcept = default;
 
  private:
   Losowanie* los_;

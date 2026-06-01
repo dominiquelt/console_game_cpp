@@ -8,7 +8,3 @@ int Dice::Roll() {
   return dist_(*gen);
 }
 
-Dice::~Dice() = default;
-
-Dice::Dice(Dice&& other) noexcept = default;
-Dice& Dice::operator=(Dice&& other) noexcept = default;

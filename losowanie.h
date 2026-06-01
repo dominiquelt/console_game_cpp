@@ -8,7 +8,7 @@ class Losowanie {
  public:
   static Losowanie& GetInstance();
   std::mt19937* Getgenerator();
-  ~Losowanie();
+  ~Losowanie() = default;
   Losowanie(const Losowanie&) = delete;
   Losowanie& operator=(const Losowanie&) = delete;
 

@@ -7,5 +7,5 @@
 FieldSafe::FieldSafe() {}
 
 void FieldSafe::OnLand(Player* p) {
-  std::cout << "Stoisz na bezpiecznym polu. Gramy dalej!" << std::endl;
+  std::cout << "Safe field. Keep playing!" << std::endl;
 }

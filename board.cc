@@ -24,8 +24,3 @@ void Board::HandlePlayerLand(Player* p) {
   int pos = p->GetPosition();
   fields_[pos]->OnLand(p);
 }
-Board::~Board() = default;
-
-
-Board::Board(Board&& other) noexcept = default;
-Board& Board::operator=(Board&& other) noexcept = default;

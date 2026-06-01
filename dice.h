@@ -5,20 +5,26 @@
 
 #include "losowanie.h"
 
-class Dice {
+class IDice {
+ public:
+  virtual ~IDice() = default;
+  virtual int Roll() = 0;
+};
+
+class Dice : public IDice {
  public:
   Dice(Losowanie* model);
-  int Roll();
-  ~Dice();
+  ~Dice() override = default;
+  int Roll() override;
+
   Dice(const Dice& other) = delete;
   Dice& operator=(const Dice& other) = delete;
 
-  Dice(Dice&& other) noexcept;
-  Dice& operator=(Dice&& other) noexcept;
+  Dice(Dice&& other) noexcept = default;
+  Dice& operator=(Dice&& other) noexcept = default;
 
  private:
-  Losowanie* los_;  // kompoilator domysla sie ze tu chce stworzyc obiekt jesli
-                    // istnieje konstruktor domyslny ()
+  Losowanie* los_;
   std::uniform_int_distribution<> dist_;
 };
 

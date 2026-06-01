@@ -8,7 +8,12 @@ class Player;
 class FieldJama : public Field {
  public:
   FieldJama();
-  ~FieldJama() = default;
+  ~FieldJama() override = default;
+  FieldJama(const FieldJama& other) = default;
+  FieldJama& operator=(const FieldJama& other) = default;
+  FieldJama(FieldJama&& other) noexcept = default;
+  FieldJama& operator=(FieldJama&& other) noexcept = default;
+
   void OnLand(Player* p) override;
 
  private:
